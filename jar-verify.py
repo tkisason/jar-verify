@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import urllib
+import urllib.parse
+import urllib.request
 import json
 import sys
 import datetime
@@ -87,8 +89,15 @@ def parse_sha1file_and_annotate(sha1_filepath):
 
 
 if __name__ == "__main__":
-    print("Usage:")
-    print('find . -type f -iname "*.jar"  -exec sha1sum {} \; > jar_hashes')
-    print("./jar-verify.py jar_hashes")
     if len(sys.argv) == 2:
-        pass
+        jsondata = parse_sha1file_and_annotate(sys.argv[1])
+        jsonfilename = f'{sys.argv[1]}.json'
+        with open(jsonfilename,'w') as file:
+            for line in jsondata:
+                file.write(json.dumps(line)+'\n')
+            file.close()
+    else:
+        print("Usage:")
+        print('$ find . -type f -iname "*.jar"  -exec sha1sum {} \\; > jar_hashes')
+        print("$ ./jar-verify.py jar_hashes")
+        print("json data will be located in jar_hashes.json")

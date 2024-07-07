@@ -11,13 +11,21 @@ Note:
 
 # How-To
 
-Fetch all sha1 hashes of jar files you want to analyze:
+
+1. Fetch all sha1 hashes of jar files you want to analyze:
 
 ```
 find . -type f -iname "*.jar"  -exec sha1sum {} \; > jar_hashes
 ```
+2. Run jar-verify
 
+```
+python3 jar-verify.py ./jar_hashes
+```
 
+3. review the output
 
-
-
+```
+cat jar_hashes.known 
+cat jar_hashes.unknown 
+```
