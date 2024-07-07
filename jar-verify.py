@@ -91,10 +91,10 @@ def parse_sha1file_and_annotate(sha1_filepath):
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         jsondata = parse_sha1file_and_annotate(sys.argv[1])
-        jsonfilename = f'{sys.argv[1]}.json'
-        with open(jsonfilename,'w') as file:
+        jsonfilename = f"{sys.argv[1]}.json"
+        with open(jsonfilename, "w") as file:
             for line in jsondata:
-                file.write(json.dumps(line)+'\n')
+                file.write(json.dumps(line) + "\n")
             file.close()
     else:
         print("Usage:")
